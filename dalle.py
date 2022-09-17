@@ -1,5 +1,8 @@
 import torch
 from dalle2_pytorch import DALLE2, DiffusionPriorNetwork, DiffusionPrior, Unet, Decoder, CLIP
+import matplotlib.pyplot as plt
+import numpy as np
+#import uuid
 #from image import PIL
 clip = CLIP(
     dim_text = 512,
@@ -97,7 +100,9 @@ dalle2 = DALLE2(
 images = dalle2(
     ['cute puppy chasing after a squirrel'],
     cond_scale = 2. # classifier free guidance strength (> 1 would strengthen the condition)
-)
+).detach().cpu().numpy()
+images = images.squeeze(axis = 0)
+images = np.transpose(images, (1,2,0)) 
+plt.imsave("dalle2_output.png",images)
 
 # save your image (in this example, of size 256x256)
-print(images)
