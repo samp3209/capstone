@@ -2,8 +2,30 @@ import torch
 from dalle2_pytorch import DALLE2, DiffusionPriorNetwork, DiffusionPrior, Unet, Decoder, CLIP
 import matplotlib.pyplot as plt
 import numpy as np
+import cv2
+import os 
+
 #import uuid
 #from image import PIL
+DATADIR = "S:\imagedataset\PetImages\Cat"
+test_text = []
+for filename in os.listdir(DATADIR):
+    if filename.endswith(".jpg"):
+        # Prints only text file present in My Folder
+        print(filename)
+        test_text.append(filename)
+        break
+print(test_text)
+for image in os.listdir(DATADIR):
+    #reads in image. cv2 uses bgr color so you have to convert to rgb before printing
+    image_array = cv2.imread(os.path.join(DATADIR,image))
+    rgb = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+    plt.imshow(rgb)
+    plt.show()
+    break
+
+
+#nksajnd.sp()
 clip = CLIP(
     dim_text = 512,
     dim_image = 512,
@@ -48,7 +70,7 @@ diffusion_prior = DiffusionPrior(
     net = prior_network,
     clip = clip,
     timesteps = 1000,
-    sample_timesteps = 64,
+    sample_timesteps = 64, 
     cond_drop_prob = 0.2
 ).cuda()
 
@@ -101,6 +123,8 @@ images = dalle2(
     ['cute puppy chasing after a squirrel'],
     cond_scale = 2. # classifier free guidance strength (> 1 would strengthen the condition)
 ).detach().cpu().numpy()
+
+
 images = images.squeeze(axis = 0)
 images = np.transpose(images, (1,2,0)) 
 plt.imsave("dalle2_output.png",images)
