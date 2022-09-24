@@ -9,23 +9,36 @@ import os
 #from image import PIL
 DATADIR = "S:\imagedataset\PetImages\Cat"
 test_text = []
+image_set = []
 for filename in os.listdir(DATADIR):
     if filename.endswith(".jpg"):
         # Prints only text file present in My Folder
-        print(filename)
+        #print(filename)
         test_text.append(filename)
-        break
-print(test_text)
-for image in os.listdir(DATADIR):
-    #reads in image. cv2 uses bgr color so you have to convert to rgb before printing
-    image_array = cv2.imread(os.path.join(DATADIR,image))
-    rgb = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
-    plt.imshow(rgb)
-    plt.show()
-    break
-
-
-#nksajnd.sp()
+        
+def create_imageset():
+    for image in os.listdir(DATADIR):
+        IMG_SIZE = 512
+        try:
+            #reads in image. cv2 uses bgr color so you have to convert to rgb before printing
+            image_array = cv2.imread(os.path.join(DATADIR,image), cv2.IMREAD_ANYCOLOR) #converts the image to an array on pixel values
+            #rgb = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+            test_array = cv2.resize(image_array, (IMG_SIZE, IMG_SIZE))
+            image_set.append(test_array)
+            #plt.imshow(rgb)
+            #plt.show()
+            #print(image_array)
+        except Exception as e:
+            #might be useful in the future 
+            pass
+create_imageset()
+print(len(test_text))
+print(len(image_set))
+#test_array = cv2.resize(image_array, (IMG_SIZE, IMG_SIZE))
+#rgb = cv2.cvtColor(test_array, cv2.COLOR_BGR2RGB)
+#plt.imshow(rgb)
+#plt.show()
+nksajnd.sp()
 clip = CLIP(
     dim_text = 512,
     dim_image = 512,
