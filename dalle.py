@@ -67,7 +67,7 @@ transform_tensors(image_set)
 
 #tensor = transform(tester)
 #tensor = transform()
-#print(tensors[0].size()) 3, 256, 256
+print(tensors[0].size()) #3, 256, 256
 #tensor = torch.stack(tensors) #didnt work because each tensor has a different size at entry 0 
 #print(tensor[4644].size()) 1, 25
 
