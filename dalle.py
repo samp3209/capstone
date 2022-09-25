@@ -4,12 +4,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import os 
+import torchvision.transforms as transforms
 
 #import uuid
 #from image import PIL
-DATADIR = "S:\imagedataset\PetImages\Cat"
+DATADIR = "S:\imagedataset\PetImages\catsample"
 test_text = []
 image_set = []
+tester = []
+tensors = []
+
+transform = transforms.Compose([
+    transforms.ToTensor()
+])
+
+
 for filename in os.listdir(DATADIR):
     if filename.endswith(".jpg"):
         # Prints only text file present in My Folder
@@ -18,7 +27,7 @@ for filename in os.listdir(DATADIR):
         
 def create_imageset():
     for image in os.listdir(DATADIR):
-        IMG_SIZE = 512
+        IMG_SIZE = 256
         try:
             #reads in image. cv2 uses bgr color so you have to convert to rgb before printing
             image_array = cv2.imread(os.path.join(DATADIR,image), cv2.IMREAD_ANYCOLOR) #converts the image to an array on pixel values
@@ -31,14 +40,44 @@ def create_imageset():
         except Exception as e:
             #might be useful in the future 
             pass
+
+def test_image():
+    i=0
+    for image in os.listdir(DATADIR):
+        IMG_SIZE = 256
+        image_array = cv2.imread(os.path.join(DATADIR, image), cv2.IMREAD_ANYCOLOR) #converts the image to an array on pixel values
+        test_array = cv2.resize(image_array, (IMG_SIZE, IMG_SIZE))
+        tester = cv2.cvtColor(test_array, cv2.COLOR_BGR2RGB)
+        i+=1 
+        if i == 1:
+            return tester
+
+def transform_tensors(list):
+    for tensor in list:
+        tensor = transform(tensor)
+        tensor = tensor.unsqueeze(0).cuda()
+        tensors.append(tensor)
+
 create_imageset()
-print(len(test_text))
-print(len(image_set))
+transform_tensors(image_set)
+#tester = test_image()
+#print(tester.dtype)
+#print(len(test_text))
+#print(len(image_set))
+
+#tensor = transform(tester)
+#tensor = transform()
+#print(tensors[0].size()) 3, 256, 256
+#tensor = torch.stack(tensors) #didnt work because each tensor has a different size at entry 0 
+#print(tensor[4644].size()) 1, 25
+
 #test_array = cv2.resize(image_array, (IMG_SIZE, IMG_SIZE))
-#rgb = cv2.cvtColor(test_array, cv2.COLOR_BGR2RGB)
-#plt.imshow(rgb)
+#rgb = cv2.cvtColor(image_set[1], cv2.COLOR_BGR2RGB)
+#plt.imshow(tester)
 #plt.show()
-nksajnd.sp()
+
+#nksajnd.sp() #rest here 
+
 clip = CLIP(
     dim_text = 512,
     dim_image = 512,
@@ -54,9 +93,10 @@ clip = CLIP(
 ).cuda()
 
 # mock data
-
+#text = test_text[0]
 text = torch.randint(0, 49408, (4, 256)).cuda()
-images = torch.randn(4, 3, 256, 256).cuda()
+#images = torch.randn(4, 3, 256, 256).cuda()
+images = tensors[0]
 
 # train
 
@@ -136,7 +176,6 @@ images = dalle2(
     ['cute puppy chasing after a squirrel'],
     cond_scale = 2. # classifier free guidance strength (> 1 would strengthen the condition)
 ).detach().cpu().numpy()
-
 
 images = images.squeeze(axis = 0)
 images = np.transpose(images, (1,2,0)) 
