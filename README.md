@@ -4,10 +4,11 @@ LOGO-istics: Artificially Generated Logos and Promotional Images
 Champlain Capstone Project:
 ![logoistics model](https://user-images.githubusercontent.com/62715864/232336954-10b30896-7975-4bbd-95af-1a46e54d9185.png)
 
-Original Image
+Original Image:
+
 ![Champlain_College_seal](https://user-images.githubusercontent.com/62715864/232337015-1d8b045e-dab5-4686-9f24-14ef1c821fe4.png)
 
-Variations Using Text-2-Image!
+Variations Using Text-2-Image:
 
 ![00451-614586980-Champlain College Lake and Mountain Shield in the style of Wassily Kandinsky, with abstract shapes and colors that express the e](https://user-images.githubusercontent.com/62715864/232337107-bb51c017-15ba-4909-9d39-78d2bf8abdee.png)
 
