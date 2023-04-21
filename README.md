@@ -1,6 +1,9 @@
 # capstone
 LOGO-istics: Artificially Generated Logos and Promotional Images
 
+How to make similar project:
+Go to notebooks and read the readme file for order of files to run
+
 Champlain Capstone Project:
 ![logoistics model](https://user-images.githubusercontent.com/62715864/232336954-10b30896-7975-4bbd-95af-1a46e54d9185.png)
 
