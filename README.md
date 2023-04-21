@@ -1,4 +1,4 @@
-# capstone
+# Capstone Project
 LOGO-istics: Artificially Generated Logos and Promotional Images
 
 How to make similar project:
@@ -20,5 +20,6 @@ Variations Using Text-2-Image:
 ![00443-154173977-Champlain College Lake and Mountain Shield as a mixed media sculpture, incorporating elements of the shield and the lake and mou](https://user-images.githubusercontent.com/62715864/232337137-b3d0e310-2812-4507-ad50-1525abef2300.png)
 
 ![00449-527533848-Champlain College Lake and Mountain Shield in the style of Claude Monet, with soft, pastel colors and impressionistic brushwork](https://user-images.githubusercontent.com/62715864/232337359-f44c7573-d985-434c-bc5a-f8483ce54c3f.png)
+
 
 [LOGO-istics WHAT WHY and HOW (1).pdf](https://github.com/samp3209/capstone/files/11299458/LOGO-istics.WHAT.WHY.and.HOW.1.pdf)
